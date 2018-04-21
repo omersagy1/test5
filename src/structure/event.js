@@ -3,8 +3,12 @@ class Event {
   // Trigger is a fn: state -> boolean.
   constructor(prompt,
               trigger,
-              choices) {
+              choices,
+              recurring) {
     this.prompt = prompt;
+    this.trigger = trigger;
+    this.choices = choices;
+    this.recurring = recurring;
   }
 
 }
@@ -19,13 +23,12 @@ class Choice {
 
 }
 
-EVENT_TEMPLATES = [
-  {
-    text: 'A man walks in and asks for three bucks.'
-  },
-  {
-    text: 'A bird flies overhead.'
-  }
-];
+class Milestone {
 
-export { Event, EVENT_TEMPLATES };
+  constructor(description) {
+    this.description = description;
+  }
+
+}
+
+export {Event};
