@@ -1,4 +1,5 @@
 import {Fire} from './fire';
+import {ActionType} from './input';
 
 class State {
   constructor() {
@@ -12,6 +13,14 @@ class State {
   update = (time_elapsed_ms) => {
     this.fire.update(time_elapsed_ms);
   }
+
+  processAction = (action) => {
+    if (action === ActionType.STOKE_FIRE) {
+      console.log('STOKING');
+      this.fire.stoke();
+    }
+  }
+
 }
 
 class Resource {

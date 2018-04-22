@@ -1,6 +1,7 @@
 import React from 'react';
 
 import {Game} from './structure/game';
+import {ActionType} from './structure/input';
 
 import {Firebar, StokeButton} from './render/fire';
 
@@ -8,22 +9,34 @@ class App extends React.Component {
 
   constructor() {
     super();
+
     this.state = {
-      game: new Game()
+      // Modify the heartbeat to rerender.
+      heartbeat: false
     }
+
+    this.game = new Game(this.triggerRender);
+  }
+
+  triggerRender = () => {
+    this.setState({heartbeat: !this.state.heartbeat});
   }
 
   componentDidMount() {
-    this.state.game.play();
+    this.game.play();
   }
 
   render() {
-    let s = this.state.game.state;
-    console.log(s);
+    let s = this.game.state;
+
+    let stoke_callback = () => {
+      this.game.queueInput(ActionType.STOKE_FIRE);
+    };
+
     return (
       <div>
         <Firebar fire_model={s.fire} />
-        <StokeButton />
+        <StokeButton action_callback={stoke_callback}/>
       </div>
     )
   }

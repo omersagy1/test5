@@ -1,13 +1,13 @@
 import {State} from './state';
-import {ActionType} from './input';
 
 const FRAME_LENGTH_MS = 1000 / 20;
 
 class Game {
 
-  constructor() {
+  constructor(render_callback) {
     this.state = new State();
     this.input_queue = [];
+    this.render = render_callback;
   }
 
   // Initiates the game loop.
@@ -23,6 +23,7 @@ class Game {
 
     this.updateState(time_elapsed_ms);
     this.processInput();
+    this.render();
   }
 
   // Stops the game, but does not clear the state.
@@ -38,9 +39,17 @@ class Game {
     this.input_queue.push(action);
   }
 
-  processInput = () => {
-    // loop through input queue and process actions.
+  clearInputQueue = () => {
+    this.input_queue = [];
   }
+
+  processInput = () => {
+    for (let a of this.input_queue) {
+      this.state.processAction(a);        
+    }
+    this.clearInputQueue();
+  }
+
 }
 
 export {Game};
