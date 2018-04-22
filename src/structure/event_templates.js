@@ -1,11 +1,12 @@
 import * as triggers from './triggers';
+import {Event} from './event';
 
 // Events have:
 // - text
 // - trigger
 // - choice[]
 // - recurring
-EVENT_TEMPLATES = [
+const EVENT_TEMPLATES = [
   
   {
     text: 'Make sure the fire does not go out.',
@@ -19,4 +20,12 @@ EVENT_TEMPLATES = [
 
 ]
 
-export {EVENT_TEMPLATES}
+const getEvent = () => {
+  return makeEvent(EVENT_TEMPLATES[0]);
+}
+
+const makeEvent = (template) => {
+  return new Event(template.text, template.trigger);
+}
+
+export {getEvent};
