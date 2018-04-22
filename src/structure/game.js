@@ -20,6 +20,7 @@ class Game {
   loop = () => {
     let current_time = new Date().getTime();
     let time_elapsed_ms = current_time - this.last_time;
+    this.last_time = current_time;
 
     this.updateState(time_elapsed_ms);
     this.processInput();

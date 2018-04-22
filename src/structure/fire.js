@@ -15,7 +15,10 @@ class Fire {
       * FIRE_DEPLETION_FRAC_PER_SECOND
       * (time_elapsed_ms / 1000));
 
-    this.strength -= depletion
+    this.strength -= depletion;
+    if (this.strength < 0) {
+      this.strength = 0;
+    }
   }
 
   stoke = () => {

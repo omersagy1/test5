@@ -16,7 +16,6 @@ class State {
 
   processAction = (action) => {
     if (action === ActionType.STOKE_FIRE) {
-      console.log('STOKING');
       this.fire.stoke();
     }
   }
