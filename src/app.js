@@ -9,6 +9,10 @@ class App extends React.Component {
     this.game = new Game();
   }
 
+  componentDidMount() {
+    this.game.play();
+  }
+
   render() {
     return <div>hello!</div>;
   }
