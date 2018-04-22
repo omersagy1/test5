@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {Game} from './structure/game.js'
+import {Game} from './structure/game'
 
 class App extends React.Component {
 

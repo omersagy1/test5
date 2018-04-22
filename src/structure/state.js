@@ -1,9 +1,13 @@
 class State {
   constructor() {
     this.event_history = [];
-    this.fire_strength = MIN_FIRE_STRENGTH;
+    this.fire = new Fire();
     this.resources = [];
     this.milestones = [];
+  }
+
+  update = () => {
+
   }
 }
 

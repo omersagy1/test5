@@ -1,5 +1,10 @@
-import * as triggers from './triggers.js';
+import * as triggers from './triggers';
 
+// Events have:
+// - text
+// - trigger
+// - choice[]
+// - recurring
 EVENT_TEMPLATES = [
   
   {
