@@ -1,7 +1,7 @@
 const fireIsLow = (state) => { 
-  return state.fire_strength < 30; 
+  return state.fire.strength < 30; 
 }
 
 const oneMinutePassed = (state) => {
-  return state.seconds_passed > 60;
+  return state.timeElapsedSeconds() > 60;
 }

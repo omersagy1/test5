@@ -20,12 +20,14 @@ const EVENT_TEMPLATES = [
 
 ]
 
-const getEvent = () => {
-  return makeEvent(EVENT_TEMPLATES[0]);
-}
 
 const makeEvent = (template) => {
   return new Event(template.text, template.trigger);
 }
 
-export {getEvent};
+const getAllEvents = () => {
+  return EVENT_TEMPLATES.map(makeEvent);
+}
+
+
+export {getAllEvents};

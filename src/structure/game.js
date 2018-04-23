@@ -12,7 +12,9 @@ class Game {
 
   // Initiates the game loop.
   play = () => {
-    this.last_time = new Date().getTime();
+    const start_time = new Date().getTime();
+    this.state.start(start_time);
+    this.last_time = start_time;
     this.ticker = setInterval(this.loop, FRAME_LENGTH_MS);
   }
 
