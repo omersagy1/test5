@@ -11,6 +11,7 @@ class State {
     this.start_time_ms = null;
 
     this.event_history = [];
+    this.action_history = [];
     this.resources = [];
     this.milestones = new Set();
 
@@ -36,6 +37,7 @@ class State {
       this.fire.stoke();
       this.milestones.add(MilestoneType.FIRE_STOKED_ONCE);
     }
+    this.action_history.push(action);
   }
 
   checkEventTriggers = () => {
