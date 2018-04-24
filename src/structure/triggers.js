@@ -1,7 +1,12 @@
-const fireIsLow = (state) => { 
-  return state.fire.strength < 30; 
+import {MilestoneType} from './milestones';
+
+export const fireIsLow = (state) => { 
+  return (state.milestoneReached(MilestoneType.FIRE_STOKED_ONCE)
+          && state.fire.strength < 30);
 }
 
-const oneMinutePassed = (state) => {
-  return state.timeElapsedSeconds() > 60;
+export const secondsPassed = (seconds) => {
+  return ((state) => state.timeElapsedSeconds() > seconds);
 }
+
+export const oneMinutePassed = secondsPassed(60);

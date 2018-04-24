@@ -2,32 +2,35 @@ import * as triggers from './triggers';
 import {Event} from './event';
 
 // Events have:
-// - text
+// - prompt
 // - trigger
 // - choice[]
 // - recurring
 const EVENT_TEMPLATES = [
+
+  {
+    prompt: 'Test -- first event.',
+    trigger: triggers.secondsPassed(5)
+  },
   
   {
-    text: 'Make sure the fire does not go out.',
+    prompt: 'Make sure the fire does not go out.',
     trigger: triggers.fireIsLow
   },
 
   {
-    text: 'A man walks in. And walks back out.',
-    trigger: triggers.oneMinutePassed
-  }
+    prompt: 'A man walks in. And walks back out.',
+    trigger: triggers.secondsPassed(30)
+  },
 
 ]
 
-
 const makeEvent = (template) => {
-  return new Event(template.text, template.trigger);
+  return new Event(template.prompt, template.trigger);
 }
 
 const getAllEvents = () => {
   return EVENT_TEMPLATES.map(makeEvent);
 }
-
 
 export {getAllEvents};

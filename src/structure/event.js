@@ -13,22 +13,4 @@ class Event {
 
 }
 
-class Choice {
-
-  // Consequence is a fn that mutates the state.
-  constructor(text, consequence) {
-    this.text = text;
-    this.consequence = consequence;
-  }
-
-}
-
-class Milestone {
-
-  constructor(description) {
-    this.description = description;
-  }
-
-}
-
 export {Event};

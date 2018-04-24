@@ -1,16 +1,18 @@
 import {Fire} from './fire';
 import {ActionType} from './input';
+import {MilestoneType} from './milestones';
 
 import {getAllEvents} from './event_templates';
 
 class State {
 
   constructor() {
-    this.event_history = [];
-    this.resources = [];
-    this.milestones = [];
     this.possible_events = getAllEvents();
     this.start_time_ms = null;
+
+    this.event_history = [];
+    this.resources = [];
+    this.milestones = new Set();
 
     this.fire = new Fire();
   }
@@ -20,7 +22,8 @@ class State {
   }
 
   timeElapsedSeconds = () => {
-    return (new Date().getTime() - this.start_time) / 1000;
+    let rtn = (new Date().getTime() - this.start_time_ms) / 1000;
+    return rtn;
   }
 
   update = (time_elapsed_ms) => {
@@ -31,31 +34,33 @@ class State {
   processAction = (action) => {
     if (action === ActionType.STOKE_FIRE) {
       this.fire.stoke();
+      this.milestones.add(MilestoneType.FIRE_STOKED_ONCE);
     }
   }
 
   checkEventTriggers = () => {
-    events_run = [];
+    let events_run = [];
     for (let e of this.possible_events) {
       if (e.trigger(this)) {
         this.runEvent(e);
-        this.events_run.push(e);
+        events_run.push(e);
       }
     }
     // Assumes that events can only run once.
     this.possible_events = (
       this.possible_events.filter((e) => {
-        return !events_run.includes(e));
-    });
+        return !events_run.includes(e);
+    }));
   }
 
-}
-
-class Resource {
-  constructor(name) {
-    this.name = name;
-    this.val = 0;
+  runEvent = (event) => {
+    this.event_history.push(event);
   }
+
+  milestoneReached = (milestone) => {
+    return this.milestones.has(milestone);
+  }
+
 }
 
 export {State};
