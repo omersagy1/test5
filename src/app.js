@@ -6,6 +6,8 @@ import {ActionType} from './structure/input';
 import {Firebar, StokeButton} from './render/fire';
 import {EventDisplay} from './render/event_display';
 
+import "./app.css";
+
 class App extends React.Component {
 
   constructor() {
@@ -35,10 +37,17 @@ class App extends React.Component {
     };
 
     return (
-      <div>
-        <EventDisplay events={s.event_history} />
-        <Firebar fire_model={s.fire} />
-        <StokeButton action_callback={stoke_callback} />
+      <div className="display-container">
+
+        <div className="text-display">
+          <EventDisplay events={s.event_history} />
+        </div>
+
+        <div className="interactive-display">
+          <Firebar fire_model={s.fire} />
+          <StokeButton action_callback={stoke_callback} />
+        </div>
+
       </div>
     )
   }

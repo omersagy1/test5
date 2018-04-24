@@ -1,0 +1,11 @@
+.display-container {
+  display: flex;
+}
+
+.text-display {
+  width: 300px;
+}
+
+.interactive-display {
+  flex-grow: 1;
+};
