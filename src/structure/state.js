@@ -37,6 +37,8 @@ class State {
     if (action.type === ActionType.STOKE_FIRE) {
       this.fire.stoke();
       this.milestones.add(MilestoneType.FIRE_STOKED_ONCE);
+    } else if (action.type === ActionType.SELECT_CHOICE) {
+      this.makeChoice(action.text);
     }
   }
 
@@ -64,6 +66,20 @@ class State {
 
   choiceRequired = (event) => {
     this.active_event = event;
+  }
+
+  makeChoice = (choice_text) => {
+    for (let choice of this.active_event.choices) {
+      if (choice.text === choice_text) {
+        // TODO: enforce the consequence and the event
+        // satisfying the interface needed to display
+        // text in the event_history. Also consider
+        // renaming event_history.
+        this.event_history.push(choice.consequence);
+        choice.consequence.execute(this);
+      }
+    }
+    this.active_event = null;
   }
 
   didReachMilestone = (milestone) => {
