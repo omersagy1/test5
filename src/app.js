@@ -1,11 +1,13 @@
 import React from 'react';
 
 import {Game} from './structure/game';
-import {ActionType} from './structure/input';
+import * as input from './structure/input';
 
 import {Firebar, StokeButton} from './render/fire';
 import {EventDisplay} from './render/event_display';
 import {ChoiceButtonRow} from './render/choice_buttons.js';
+
+import './app.css';
 
 class App extends React.Component {
 
@@ -31,26 +33,17 @@ class App extends React.Component {
   render() {
     let s = this.game.state;
 
-    let stoke_callback = () => {
-      this.game.queueInput({
-          type: ActionType.STOKE_FIRE
-      });
-    };
-
-    let select_choice_callback = (choice_text) => {
-      this.game.queueInput({
-        type: ActionType.SELECT_CHOICE,
-        text: choice_text
-      });
-    }
-
     return (
-      <div>
-        <EventDisplay events={s.event_history} />
-        <Firebar fire_model={s.fire} />
-        <StokeButton action_callback={stoke_callback} />
-        <ChoiceButtonRow action_callback={select_choice_callback}
-                         active_event={s.active_event} />
+      <div className="main-screen">
+        <EventDisplay 
+          events={s.event_history} />
+        <Firebar 
+          fire_model={s.fire} />
+        <StokeButton 
+          action_callback={input.stokeCallback(this.game)} />
+        <ChoiceButtonRow 
+          action_callback={input.selectChoiceCallback(this.game)}
+          active_event={s.active_event} />
       </div>
     )
   }
