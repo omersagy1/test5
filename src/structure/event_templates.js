@@ -3,6 +3,7 @@ import * as mutators from './mutators';
 import {Event, Choice, Consequence} from './event';
 
 // Events have:
+// - id
 // - prompt
 // - trigger
 // - choice[]
@@ -10,18 +11,21 @@ import {Event, Choice, Consequence} from './event';
 const EVENT_TEMPLATES = [
 
   {
-    trigger: triggers.secondsPassed(5),
-    prompt: 'Test -- first event.'
+    id: 'first-event',
+    prompt: 'Test -- first event.',
+    trigger: triggers.secondsPassed(5)
   },
   
   {
-    trigger: triggers.fireIsLow,
-    prompt: 'Make sure the fire does not go out.'
+    id: 'fire-warning',
+    prompt: 'Make sure the fire does not go out.',
+    trigger: triggers.fireIsLow
   },
 
   {
-    trigger: triggers.secondsPassed(30),
-    prompt: 'A man walks in. And walks back out.'
+    id: 'man-enters',
+    prompt: 'A man walks in. And walks back out.',
+    trigger: triggers.secondsPassed(30)
   },
 
   {

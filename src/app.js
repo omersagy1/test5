@@ -9,6 +9,8 @@ import {ChoiceButtonRow} from './render/choice_buttons.js';
 
 import './app.css';
 
+import "./app.css";
+
 class App extends React.Component {
 
   constructor() {
@@ -34,16 +36,22 @@ class App extends React.Component {
     let s = this.game.state;
 
     return (
-      <div className='main-screen'>
-        <EventDisplay 
-          events={s.event_history} />
-        <Firebar 
-          fire_model={s.fire} />
-        <StokeButton 
-          action_callback={input.stokeCallback(this.game)} />
-        <ChoiceButtonRow 
-          action_callback={input.selectChoiceCallback(this.game)}
-          active_event={s.active_event} />
+      <div className="display-container">
+
+        <div className="text-display">
+          <EventDisplay events={s.event_history} />
+          <ChoiceButtonRow 
+            action_callback={input.selectChoiceCallback(this.game)}
+            active_event={s.active_event} />
+        </div>
+
+        <div className="interactive-display">
+          <Firebar 
+            fire_model={s.fire} />
+          <StokeButton 
+            action_callback={input.stokeCallback(this.game)} />
+        </div>
+
       </div>
     )
   }

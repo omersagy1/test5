@@ -11,6 +11,7 @@ class State {
     this.start_time_ms = null;
 
     this.event_history = [];
+    this.action_history = [];
     this.resources = [];
     this.milestones = new Set();
 
@@ -40,6 +41,7 @@ class State {
     } else if (action.type === ActionType.SELECT_CHOICE) {
       this.makeChoice(action.text);
     }
+    this.action_history.push(action);
   }
 
   checkEventTriggers = () => {
