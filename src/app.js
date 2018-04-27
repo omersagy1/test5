@@ -34,7 +34,7 @@ class App extends React.Component {
     let s = this.game.state;
 
     return (
-      <div className="main-screen">
+      <div className='main-screen'>
         <EventDisplay 
           events={s.event_history} />
         <Firebar 
