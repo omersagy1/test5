@@ -1,7 +1,7 @@
 import {MilestoneType} from './milestones';
 
 export const fireIsLow = (state) => { 
-  return (state.milestoneReached(MilestoneType.FIRE_STOKED_ONCE)
+  return (state.didReachMilestone(MilestoneType.FIRE_STOKED_ONCE)
           && state.fire.strength < 30);
 }
 

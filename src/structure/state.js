@@ -14,6 +14,8 @@ class State {
     this.resources = [];
     this.milestones = new Set();
 
+    this.active_choice = null;
+
     this.fire = new Fire();
   }
 
@@ -32,7 +34,7 @@ class State {
   }
 
   processAction = (action) => {
-    if (action === ActionType.STOKE_FIRE) {
+    if (action.type === ActionType.STOKE_FIRE) {
       this.fire.stoke();
       this.milestones.add(MilestoneType.FIRE_STOKED_ONCE);
     }
@@ -55,9 +57,16 @@ class State {
 
   runEvent = (event) => {
     this.event_history.push(event);
+    if (event.hasChoices()) {
+      this.choiceRequired(event);
+    }
   }
 
-  milestoneReached = (milestone) => {
+  choiceRequired = (event) => {
+    this.active_event = event;
+  }
+
+  didReachMilestone = (milestone) => {
     return this.milestones.has(milestone);
   }
 

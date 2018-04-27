@@ -24,6 +24,10 @@ class Fire {
   stoke = () => {
     this.strength = MAX_FIRE_STRENGTH;
   }
+
+  dampen = (factor) => {
+    this.strength = this.strength * factor
+  }
 }
 
 export {Fire};

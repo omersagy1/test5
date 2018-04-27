@@ -1,7 +1,7 @@
 import React from 'react';
 
 const EventDisplay = ({events}) => {
-  const lines = events.map((e) => e.prompt).reverse();
+  const lines = events.map((e) => e.text).reverse();
   const line_divs = lines.map(
     (l) => <LineDisplay line={l} key={l}/>);
 

@@ -6,9 +6,11 @@ const Firebar = ({fire_model}) => {
 
 const StokeButton = ({action_callback}) => {
   return (
-    <button onClick={action_callback}>
-      stoke fire
-    </button>
+    <div>
+      <button onClick={action_callback}>
+        stoke fire
+      </button>
+    </div>
   );
 }
 
