@@ -1,9 +1,11 @@
 class Event {
 
   // Trigger is a fn: state -> boolean.
-  constructor(prompt,
+  constructor(id,
+              prompt,
               trigger,
               choices) {
+    this.id = id;
     this.prompt = prompt;
     this.trigger = trigger;
     this.choices = choices;

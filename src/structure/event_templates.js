@@ -1,4 +1,4 @@
-import * as triggers from './triggers';
+import * as t from './triggers';
 import * as mutators from './mutators';
 import {Event, Choice, Consequence} from './event';
 
@@ -12,24 +12,25 @@ const EVENT_TEMPLATES = [
 
   {
     id: 'first-event',
-    prompt: 'Test -- first event.',
-    trigger: triggers.secondsPassed(5)
+    trigger: t.secondsPassed(5),
+    prompt: 'Test -- first event.'
   },
   
   {
     id: 'fire-warning',
-    prompt: 'Make sure the fire does not go out.',
-    trigger: triggers.fireIsLow
+    trigger: t.fireIsLow,
+    prompt: 'Make sure the fire does not go out.'
   },
 
   {
     id: 'man-enters',
-    prompt: 'A man walks in. And walks back out.',
-    trigger: triggers.secondsPassed(30)
+    trigger: t.secondsPassed(30),
+    prompt: 'A man walks in. And walks back out.'
   },
 
   {
-    trigger: triggers.secondsPassed(10),
+    id: 'dampen-choice',
+    trigger: t.secondsPassed(10),
     prompt: 'Dampen the fire?',
     choices: [
       { 
@@ -46,6 +47,18 @@ const EVENT_TEMPLATES = [
           effect: mutators.noOp
         }
       }]
+  },
+
+  {
+    id: 'fire-is-out',
+    trigger: t.fireWentOut,
+    prompt: 'The fire is dead. Watch out.'
+  },
+
+  {
+    id: 'fire-stoked',
+    trigger: t.fireStoked,
+    prompt: 'The fire is roaring.'
   }
 
 ]
@@ -55,7 +68,8 @@ const makeEvent = (template) => {
   if (template.choices !== undefined) {
     choices = template.choices.map(makeChoice);
   }
-  return new Event(template.prompt,
+  return new Event(template.id,
+                   template.prompt,
                    template.trigger,
                    choices);
 }

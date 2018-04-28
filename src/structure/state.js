@@ -88,6 +88,11 @@ class State {
     return this.milestones.has(milestone);
   }
 
+  actionPerformed = (action_type) => {
+    let types = this.action_history.map((a) => a.type);
+    return types.includes(action_type);
+  }
+
 }
 
 export {State};
