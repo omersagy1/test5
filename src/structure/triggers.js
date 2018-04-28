@@ -17,9 +17,10 @@ export const and = (trig1, trig2) => {
 
 // Triggers that accept a state.
 
+export const fireStoked = actionPerformed(ActionType.STOKE_FIRE);
+
 export const fireIsLow = (state) => { 
-  return (state.didReachMilestone(MilestoneType.FIRE_STOKED_ONCE)
-          && state.fire.strength < 30);
+  return fireStoked(state) && state.fire.strength < 30;
 }
 
 export const oneMinutePassed = secondsPassed(60);
@@ -29,4 +30,3 @@ export const fireWentOut = (state) => {
           && state.fire.strength <= 0);
 }
 
-export const fireStoked = actionPerformed(ActionType.STOKE_FIRE);

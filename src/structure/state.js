@@ -37,7 +37,6 @@ class State {
   processAction = (action) => {
     if (action.type === ActionType.STOKE_FIRE) {
       this.fire.stoke();
-      this.milestones.add(MilestoneType.FIRE_STOKED_ONCE);
     } else if (action.type === ActionType.SELECT_CHOICE) {
       this.makeChoice(action.text);
     }
