@@ -1,16 +1,23 @@
 import React from 'react';
 
-const MAX_NUM_LINES = 10;
+const MAX_NUM_LINES = 10; // number of lines in the display history
+const OPACITY_FALLOFF = .7; // approx opacity of the second line
+const LINE_MARGIN = 10; // pixels
 
 const EventDisplay = ({events}) => {
   const lines = events.map((e) => e.text).reverse();
 
   const line_divs = [];
   for (let [i, l] of lines.entries()) {
-    let opacity = (MAX_NUM_LINES - i) / MAX_NUM_LINES ;
-    line_divs.push(<LineDisplay line={l}
-                                key={l}
-                                opacity={opacity} />);
+    let opacity = 1; 
+    if (i > 0) {
+      opacity = OPACITY_FALLOFF * (MAX_NUM_LINES - i) / MAX_NUM_LINES;
+    }
+    line_divs.push(
+      <LineDisplay line={l}
+                   key={l}
+                   opacity={opacity} />
+    );
   }
 
   return <div>{line_divs}</div>;
@@ -18,7 +25,8 @@ const EventDisplay = ({events}) => {
 
 const LineDisplay = ({line, opacity}) => {
   const style = {
-    opacity: opacity
+    opacity: opacity,
+    marginBottom: LINE_MARGIN
   };
   return <div style={style}>{line}</div>;
 }
