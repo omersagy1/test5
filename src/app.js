@@ -40,16 +40,18 @@ class App extends React.Component {
 
         <div className="text-display">
           <EventDisplay events={s.event_history} />
-          <ChoiceButtonRow 
-            action_callback={input.selectChoiceCallback(this.game)}
-            active_event={s.active_event} />
         </div>
 
         <div className="interactive-display">
-          <Firebar 
-            fire_model={s.fire} />
-          <StokeButton 
-            action_callback={input.stokeCallback(this.game)} />
+          <div className="fire-display">
+            <Firebar 
+              fire_model={s.fire} />
+            <StokeButton 
+              action_callback={input.stokeCallback(this.game)} />
+          </div>
+          <ChoiceButtonRow 
+            action_callback={input.selectChoiceCallback(this.game)}
+            active_event={s.active_event} />
         </div>
 
       </div>

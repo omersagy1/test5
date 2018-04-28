@@ -9,12 +9,6 @@ import {Event, Choice, Consequence} from './event';
 // - choice[]
 // - recurring
 const EVENT_TEMPLATES = [
-
-  {
-    id: 'first-event',
-    trigger: t.secondsPassed(5),
-    prompt: 'Test -- first event.'
-  },
   
   {
     id: 'fire-warning',
@@ -25,7 +19,22 @@ const EVENT_TEMPLATES = [
   {
     id: 'man-enters',
     trigger: t.secondsPassed(30),
-    prompt: 'A man walks in. And walks back out.'
+    prompt: 'A man walks in.',
+    choices: [
+      {
+        text: '"Who are you?"',
+        consequence: {
+          text: 'The man leaves silently.',
+          effect: mutators.noOp
+        }
+      },
+      {
+        text: 'Kill him',
+        consequence: {
+          text: 'He\'s dead. Be careful.',
+          effect: mutators.noOp
+        }
+      }]
   },
 
   {

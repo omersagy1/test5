@@ -13,4 +13,8 @@ body {
 
 .interactive-display {
   flex-grow: 1;
-};
+}
+
+.fire-display {
+  margin-bottom: 10px;
+}
