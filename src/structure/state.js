@@ -3,6 +3,9 @@ import {ActionType} from './input';
 import {MilestoneType} from './milestones';
 
 import {getAllEvents} from './event_templates';
+import {TimedQueue} from './timed_queue';
+
+const DISPLAY_MESSAGE_DELAY_MS = 1000;
 
 class State {
 
@@ -17,7 +20,8 @@ class State {
 
     this.active_choice = null;
 
-    this.display_message_queue = [];
+    this.display_message_queue = new TimedQueue(
+      DISPLAY_MESSAGE_DELAY_MS);
     this.display_message_history = [];
 
     this.fire = new Fire();
@@ -35,6 +39,15 @@ class State {
   update = (time_elapsed_ms) => {
     this.fire.update(time_elapsed_ms);
     this.checkEventTriggers();
+    this.processDisplayMessages(time_elapsed_ms);
+  }
+
+  processDisplayMessages = (time_elapsed_ms) => {
+    this.display_message_queue.incrementTime(time_elapsed_ms);
+    if (this.display_message_queue.readyToPop()) {
+      this.display_message_history.push(
+        this.display_message_queue.pop());
+    }
   }
 
   processAction = (action) => {
@@ -100,7 +113,7 @@ class State {
   }
 
   getMessageHistory = () => {
-    return this.display_message_history;
+    return this.display_message_history.slice();
   }
 
 }

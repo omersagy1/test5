@@ -1,6 +1,7 @@
 class Event {
 
-  // Trigger is a fn: state -> boolean.
+  // 'trigger' is a fn: state -> boolean.
+  // 'text' is an array of strings.
   constructor(id,
               text,
               trigger,
@@ -14,6 +15,10 @@ class Event {
   hasChoices = () => {
     return (this.choices !== undefined
             && this.choices.length > 0);
+  }
+
+  getDisplayMessages = () => {
+    return this.text.slice();
   }
 
 }
