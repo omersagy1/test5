@@ -4,7 +4,7 @@ import {Event, Choice, Consequence} from './event';
 
 // Events have:
 // - id
-// - prompt
+// - text
 // - trigger
 // - choice[]
 // - recurring
@@ -13,13 +13,13 @@ const EVENT_TEMPLATES = [
   {
     id: 'fire-warning',
     trigger: t.fireIsLow,
-    prompt: 'Make sure the fire does not go out.'
+    text: 'Make sure the fire does not go out.'
   },
 
   {
     id: 'man-enters',
     trigger: t.secondsPassed(30),
-    prompt: 'A man walks in.',
+    text: 'A man walks in.',
     choices: [
       {
         text: '"Who are you?"',
@@ -40,7 +40,7 @@ const EVENT_TEMPLATES = [
   {
     id: 'dampen-choice',
     trigger: t.secondsPassed(10),
-    prompt: 'Dampen the fire?',
+    text: 'Dampen the fire?',
     choices: [
       { 
         text: 'Yes', 
@@ -61,13 +61,13 @@ const EVENT_TEMPLATES = [
   {
     id: 'fire-is-out',
     trigger: t.fireWentOut,
-    prompt: 'The fire is dead. Watch out.'
+    text: 'The fire is dead. Watch out.'
   },
 
   {
     id: 'fire-stoked',
     trigger: t.fireStoked,
-    prompt: 'The fire is roaring.'
+    text: 'The fire is roaring.'
   }
 
 ]
@@ -77,8 +77,16 @@ const makeEvent = (template) => {
   if (template.choices !== undefined) {
     choices = template.choices.map(makeChoice);
   }
+
+  let text;
+  if (Array.isArray(template.text)) {
+    text = template.text;
+  } else {
+    text = [template.text];
+  }
+
   return new Event(template.id,
-                   template.prompt,
+                   text,
                    template.trigger,
                    choices);
 }

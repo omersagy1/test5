@@ -2,17 +2,13 @@ class Event {
 
   // Trigger is a fn: state -> boolean.
   constructor(id,
-              prompt,
+              text,
               trigger,
               choices) {
     this.id = id;
-    this.prompt = prompt;
+    this.text = text;
     this.trigger = trigger;
     this.choices = choices;
-  }
-
-  get text() {
-    return this.prompt;
   }
 
   hasChoices = () => {
