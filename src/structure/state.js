@@ -75,10 +75,11 @@ class State {
   }
 
   runEvent = (event) => {
-    this.event_history.push(event);
+    this.display_message_queue.push(...event.text)
     if (event.hasChoices()) {
       this.choiceRequired(event);
     }
+    this.event_history.push(event);
   }
 
   choiceRequired = (event) => {
@@ -86,7 +87,7 @@ class State {
   }
 
   isWaitingForChoice = () => {
-    return this.active_event != null;
+    return !!this.active_event;
   }
 
   makeChoice = (choice_text) => {
@@ -97,6 +98,7 @@ class State {
         // text in the event_history. Also consider
         // renaming event_history.
         this.event_history.push(choice.consequence);
+        this.display_message_queue.push(choice.consequence.text);
         choice.consequence.execute(this);
       }
     }

@@ -4,8 +4,8 @@ const MAX_NUM_LINES = 10; // number of lines in the display history
 const OPACITY_FALLOFF = .7; // approx opacity of the second line
 const LINE_MARGIN = 10; // pixels
 
-const EventDisplay = ({events}) => {
-  const lines = events.map((e) => e.text).reverse();
+const EventDisplay = ({messages}) => {
+  const lines = messages.reverse();
 
   const line_divs = [];
   for (let [i, l] of lines.entries()) {
