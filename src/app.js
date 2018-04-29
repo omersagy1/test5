@@ -39,7 +39,7 @@ class App extends React.Component {
       <div className="display-container">
 
         <div className="text-display">
-          <EventDisplay events={s.event_history} />
+          <EventDisplay events={s.getMessageHistory()} />
         </div>
 
         <div className="interactive-display">
@@ -51,7 +51,7 @@ class App extends React.Component {
           </div>
           <ChoiceButtonRow 
             action_callback={input.selectChoiceCallback(this.game)}
-            active_event={s.active_event} />
+            active_event={s.isWaitingForChoice()} />
         </div>
 
       </div>

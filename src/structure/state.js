@@ -17,6 +17,9 @@ class State {
 
     this.active_choice = null;
 
+    this.display_message_queue = [];
+    this.display_message_history = [];
+
     this.fire = new Fire();
   }
 
@@ -69,6 +72,10 @@ class State {
     this.active_event = event;
   }
 
+  isWaitingForChoice = () => {
+    return this.active_event != null;
+  }
+
   makeChoice = (choice_text) => {
     for (let choice of this.active_event.choices) {
       if (choice.text === choice_text) {
@@ -90,6 +97,10 @@ class State {
   actionPerformed = (action_type) => {
     let types = this.action_history.map((a) => a.type);
     return types.includes(action_type);
+  }
+
+  getMessageHistory = () => {
+    return this.display_message_history;
   }
 
 }
