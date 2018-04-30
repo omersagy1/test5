@@ -78,15 +78,8 @@ const makeEvent = (template) => {
     choices = template.choices.map(makeChoice);
   }
 
-  let text;
-  if (Array.isArray(template.text)) {
-    text = template.text;
-  } else {
-    text = [template.text];
-  }
-
   return new Event(template.id,
-                   text,
+                   toArray(template.text),
                    template.trigger,
                    choices);
 }
@@ -97,7 +90,18 @@ const makeChoice = (template) => {
 }
 
 const makeConsequence = (template) => {
-  return new Consequence(template.text, template.effect);
+  return new Event(
+    'dummy-id', 
+    toArray(template.text),
+    null, null, template.effect);
+}
+
+const toArray = (x) => {
+  if (Array.isArray(x)) {
+    return x;
+  } else {
+    return [x];
+  }
 }
 
 const getAllEvents = () => {
